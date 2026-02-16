@@ -1,5 +1,5 @@
 {
-  "id": "nwc-loadingscreen",
+  "id": "loading-screen",
   "title": "Loading Screen System",
   "description": "Showing a loading Screen while a new Scene is loading.",
   "version": "2.3.0",
@@ -22,9 +22,7 @@
     "scripts/scene-config.js",
     "scripts/loading-screen.js"
   ],
-  "styles": [
-    "styles/loading-screen.css"
-  ],
+  "styles": ["styles/loading-screen.css"],
   "languages": [
     {
       "lang": "en",
@@ -37,6 +35,6 @@
       "path": "lang/de.json"
     }
   ],
-  "url": "https://github.com/NoWitchCraft/nwc-loading-screen",
-  "manifest": "https://raw.githubusercontent.com/NoWitchCraft/nwc-loading-screen/refs/heads/main/module.json"
+  "url": "https://github.com/NoWitchCraft/loading-screen",
+  "manifest": "https://raw.githubusercontent.com/NoWitchCraft/loading-screen/refs/heads/main/module.json"
 }
