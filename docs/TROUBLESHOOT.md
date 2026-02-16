@@ -22,6 +22,7 @@ Solutions to common problems and issues.
 **Solutions**:
 
 1. **Verify Installation**
+
    ```
    Data/modules/loading-screen/
    └── module.json exists?
@@ -48,6 +49,7 @@ Solutions to common problems and issues.
 **Solutions**:
 
 1. **Check Foundry Version**
+
    ```
    Module requires: V11+
    Your version: Settings → About
@@ -75,12 +77,14 @@ Solutions to common problems and issues.
 **Check**:
 
 1. **Module Enabled?**
+
    ```
    Settings → Manage Modules
    → Loading Screen System ✅
    ```
 
 2. **Setting Enabled?**
+
    ```
    Settings → Module Settings
    → Loading Screen System
@@ -96,7 +100,7 @@ Solutions to common problems and issues.
 
 ```javascript
 // Force enable in console
-await game.settings.set('loading-screen', 'enabled', true);
+await game.settings.set("loading-screen", "enabled", true);
 // Then reload (F5)
 ```
 
@@ -112,6 +116,7 @@ await game.settings.set('loading-screen', 'enabled', true);
    - Not actually a problem
 
 2. **Fade Duration Too Fast**
+
    ```
    Settings → Fade Duration → Increase to 1.0s
    ```
@@ -128,6 +133,7 @@ await game.settings.set('loading-screen', 'enabled', true);
 **Solutions**:
 
 1. **Check Template**
+
    ```
    Settings → Loading Screen Design
    → Try "Standard"
@@ -153,6 +159,7 @@ await game.settings.set('loading-screen', 'enabled', true);
 **Check**:
 
 1. **Default Folder Set?**
+
    ```
    Settings → Module Settings
    → Default Image Folder
@@ -160,12 +167,14 @@ await game.settings.set('loading-screen', 'enabled', true);
    ```
 
 2. **Folder Has Images?**
+
    ```
    Navigate to folder in file browser
    Check: JPG, PNG, WEBP, GIF present?
    ```
 
 3. **Folder Path Correct?**
+
    ```
    Example: worlds/my-world/images/loading
    Not: C:\Users\...\Data\worlds\... (wrong)
@@ -179,13 +188,17 @@ await game.settings.set('loading-screen', 'enabled', true);
 
 ```javascript
 // Check current folder setting
-console.log(game.settings.get('loading-screen', 'imageFolder'));
+console.log(game.settings.get("loading-screen", "imageFolder"));
 
 // Check scene folders
-console.log(game.settings.get('loading-screen', 'sceneFolders'));
+console.log(game.settings.get("loading-screen", "sceneFolders"));
 
 // Test with known good path
-await game.settings.set('loading-screen', 'imageFolder', 'worlds/my-world/images');
+await game.settings.set(
+  "loading-screen",
+  "imageFolder",
+  "worlds/my-world/images",
+);
 ```
 
 ### Wrong Images Loading
@@ -204,9 +217,12 @@ await game.settings.set('loading-screen', 'imageFolder', 'worlds/my-world/images
 ```javascript
 // Check what's set for current scene
 const sceneId = canvas.scene.id;
-const sceneFolders = game.settings.get('loading-screen', 'sceneFolders');
-console.log('Scene folder:', sceneFolders[sceneId]);
-console.log('Default folder:', game.settings.get('loading-screen', 'imageFolder'));
+const sceneFolders = game.settings.get("loading-screen", "sceneFolders");
+console.log("Scene folder:", sceneFolders[sceneId]);
+console.log(
+  "Default folder:",
+  game.settings.get("loading-screen", "imageFolder"),
+);
 ```
 
 **Solutions**:
@@ -246,12 +262,14 @@ console.log('Default folder:', game.settings.get('loading-screen', 'imageFolder'
 **Solutions**:
 
 1. **Hard Reload**
+
    ```
    Ctrl+F5 (Windows/Linux)
    Cmd+Shift+R (Mac)
    ```
 
 2. **Verify Saved**
+
    ```
    Settings → Module Settings
    → Loading Screen Design
@@ -260,6 +278,7 @@ console.log('Default folder:', game.settings.get('loading-screen', 'imageFolder'
    ```
 
 3. **Clear Browser Cache**
+
    ```
    Ctrl+Shift+Delete
    → Clear cache
@@ -269,7 +288,7 @@ console.log('Default folder:', game.settings.get('loading-screen', 'imageFolder'
 4. **Check Console**
    ```javascript
    // Verify template setting
-   console.log(game.settings.get('loading-screen', 'template'));
+   console.log(game.settings.get("loading-screen", "template"));
    // Should show: 'standard', 'minimalist', 'cinematic', or 'fantasy'
    ```
 
@@ -280,6 +299,7 @@ console.log('Default folder:', game.settings.get('loading-screen', 'imageFolder'
 **Solutions**:
 
 1. **Verify Module Version**
+
    ```
    Manage Modules → Loading Screen System
    → Check version (should be 2.3.0+)
@@ -311,10 +331,11 @@ console.log('Default folder:', game.settings.get('loading-screen', 'imageFolder'
 
 ```javascript
 // Force template reset
-await game.settings.set('loading-screen', 'template', 'standard');
+await game.settings.set("loading-screen", "template", "standard");
 ```
 
 **Manual Fix**:
+
 1. Navigate to `modules/loading-screen/templates/loading-screens/`
 2. Verify all template files exist:
    - standard.html
@@ -331,6 +352,7 @@ await game.settings.set('loading-screen', 'template', 'standard');
 **Check**:
 
 1. **Tips Enabled?**
+
    ```
    Settings → Module Settings
    → Show Tips ✅
@@ -343,7 +365,7 @@ await game.settings.set('loading-screen', 'template', 'standard');
 3. **Tips Exist?**
    ```javascript
    // Check custom tips
-   console.log(game.settings.get('loading-screen', 'customTips'));
+   console.log(game.settings.get("loading-screen", "customTips"));
    // Should show tips or empty string
    ```
 
@@ -351,8 +373,8 @@ await game.settings.set('loading-screen', 'template', 'standard');
 
 ```javascript
 // Reset to default tips
-await game.settings.set('loading-screen', 'customTips', '');
-await game.settings.set('loading-screen', 'showTips', true);
+await game.settings.set("loading-screen", "customTips", "");
+await game.settings.set("loading-screen", "showTips", true);
 ```
 
 ### Tips Not Rotating
@@ -377,12 +399,14 @@ await game.settings.set('loading-screen', 'showTips', true);
 
 ```javascript
 // Set multiple test tips
-await game.settings.set('loading-screen', 'customTips', 
-  'Test Tip 1\nTest Tip 2\nTest Tip 3\nTest Tip 4'
+await game.settings.set(
+  "loading-screen",
+  "customTips",
+  "Test Tip 1\nTest Tip 2\nTest Tip 3\nTest Tip 4",
 );
 
 // Lower rotation interval
-await game.settings.set('loading-screen', 'tipRotation', 3);
+await game.settings.set("loading-screen", "tipRotation", 3);
 ```
 
 ### Custom Tips Not Saving
@@ -401,11 +425,13 @@ await game.settings.set('loading-screen', 'tipRotation', 3);
 
 3. **Try Console Method**
    ```javascript
-   await game.settings.set('loading-screen', 'customTips', 
-     'Tip 1\nTip 2\nTip 3'
+   await game.settings.set(
+     "loading-screen",
+     "customTips",
+     "Tip 1\nTip 2\nTip 3",
    );
    // Then verify
-   console.log(game.settings.get('loading-screen', 'customTips'));
+   console.log(game.settings.get("loading-screen", "customTips"));
    ```
 
 ## Performance Issues
@@ -431,6 +457,7 @@ await game.settings.set('loading-screen', 'tipRotation', 3);
 **Solutions**:
 
 1. **Optimize Images**
+
    ```
    Recommended: 1920x1080px
    Format: WEBP or JPG
@@ -438,12 +465,14 @@ await game.settings.set('loading-screen', 'tipRotation', 3);
    ```
 
 2. **Reduce Image Count**
+
    ```
    Optimal: 5-10 images per folder
    Maximum: 20 images
    ```
 
 3. **Lower Fade Duration**
+
    ```
    Settings → Fade Duration → 0.3s
    ```
@@ -461,6 +490,7 @@ await game.settings.set('loading-screen', 'tipRotation', 3);
 **Solutions**:
 
 1. **Hardware Acceleration**
+
    ```
    Browser → Settings
    → Enable hardware acceleration
@@ -491,6 +521,7 @@ await game.settings.set('loading-screen', 'tipRotation', 3);
    - Lower resolution
 
 2. **Clear Cache Regularly**
+
    ```
    Ctrl+Shift+Delete
    → Clear regularly
@@ -517,10 +548,11 @@ await game.settings.set('loading-screen', 'tipRotation', 3);
 **Common Conflicts**:
 
 - Custom loading animations modules
-- UI replacement modules  
+- UI replacement modules
 - Performance optimization modules
 
 **Workaround**:
+
 ```
 Disable conflicting module temporarily
 Or use one or the other
@@ -533,16 +565,19 @@ Or use one or the other
 **Note**: Module includes lib-wrapper shim
 
 **If lib-wrapper installed**:
+
 - Module automatically uses it
 - Shim is ignored
 - No issues
 
 **If lib-wrapper NOT installed**:
+
 - Module uses built-in shim
 - Works fine
 - No issues
 
 **Solutions**:
+
 - No action needed
 - System handles automatically
 
@@ -554,6 +589,7 @@ Or use one or the other
 **V10 and below**: Not supported ❌
 
 **Upgrading**:
+
 - Backup world first
 - Update Foundry
 - Update module
@@ -572,7 +608,7 @@ Or use one or the other
 1. Reinstall module
 2. Force standard template:
    ```javascript
-   await game.settings.set('loading-screen', 'template', 'standard');
+   await game.settings.set("loading-screen", "template", "standard");
    ```
 
 ### "Cannot read properties of null"
@@ -617,6 +653,7 @@ Or use one or the other
 ### Enable Debug Logging
 
 **In Console**:
+
 ```javascript
 // Module includes debug logs
 // Check console during scene change
@@ -626,6 +663,7 @@ Or use one or the other
 ### Inspect Element
 
 **Check Applied Styles**:
+
 ```
 F12 → Elements
 → Find #loading-screen-overlay
@@ -636,18 +674,19 @@ F12 → Elements
 ### Export Settings
 
 **Backup Current Settings**:
+
 ```javascript
 const settings = {
-  enabled: game.settings.get('loading-screen', 'enabled'),
-  template: game.settings.get('loading-screen', 'template'),
-  imageFolder: game.settings.get('loading-screen', 'imageFolder'),
-  sceneFolders: game.settings.get('loading-screen', 'sceneFolders'),
-  customText: game.settings.get('loading-screen', 'customText'),
-  showProgress: game.settings.get('loading-screen', 'showProgress'),
-  fadeDuration: game.settings.get('loading-screen', 'fadeDuration'),
-  showTips: game.settings.get('loading-screen', 'showTips'),
-  tipRotation: game.settings.get('loading-screen', 'tipRotation'),
-  customTips: game.settings.get('loading-screen', 'customTips')
+  enabled: game.settings.get("loading-screen", "enabled"),
+  template: game.settings.get("loading-screen", "template"),
+  imageFolder: game.settings.get("loading-screen", "imageFolder"),
+  sceneFolders: game.settings.get("loading-screen", "sceneFolders"),
+  customText: game.settings.get("loading-screen", "customText"),
+  showProgress: game.settings.get("loading-screen", "showProgress"),
+  fadeDuration: game.settings.get("loading-screen", "fadeDuration"),
+  showTips: game.settings.get("loading-screen", "showTips"),
+  tipRotation: game.settings.get("loading-screen", "tipRotation"),
+  customTips: game.settings.get("loading-screen", "customTips"),
 };
 console.log(JSON.stringify(settings, null, 2));
 ```
@@ -655,19 +694,20 @@ console.log(JSON.stringify(settings, null, 2));
 ### Reset to Defaults
 
 **Nuclear Option**:
+
 ```javascript
 // Reset all settings
-await game.settings.set('loading-screen', 'enabled', true);
-await game.settings.set('loading-screen', 'template', 'standard');
-await game.settings.set('loading-screen', 'imageFolder', '');
-await game.settings.set('loading-screen', 'sceneFolders', {});
-await game.settings.set('loading-screen', 'customText', 'Loading New Scene');
-await game.settings.set('loading-screen', 'showProgress', true);
-await game.settings.set('loading-screen', 'fadeDuration', 0.5);
-await game.settings.set('loading-screen', 'showTips', true);
-await game.settings.set('loading-screen', 'tipRotation', 5);
-await game.settings.set('loading-screen', 'customTips', '');
-ui.notifications.info('Settings reset! Reload page (F5)');
+await game.settings.set("loading-screen", "enabled", true);
+await game.settings.set("loading-screen", "template", "standard");
+await game.settings.set("loading-screen", "imageFolder", "");
+await game.settings.set("loading-screen", "sceneFolders", {});
+await game.settings.set("loading-screen", "customText", "Loading New Scene");
+await game.settings.set("loading-screen", "showProgress", true);
+await game.settings.set("loading-screen", "fadeDuration", 0.5);
+await game.settings.set("loading-screen", "showTips", true);
+await game.settings.set("loading-screen", "tipRotation", 5);
+await game.settings.set("loading-screen", "customTips", "");
+ui.notifications.info("Settings reset! Reload page (F5)");
 ```
 
 ## Getting Help
@@ -677,12 +717,14 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 **Collect Information**:
 
 1. **Foundry Version**
+
    ```
    Settings → About
    → Copy version number
    ```
 
 2. **Module Version**
+
    ```
    Manage Modules
    → Loading Screen System
@@ -690,12 +732,14 @@ ui.notifications.info('Settings reset! Reload page (F5)');
    ```
 
 3. **Console Errors**
+
    ```
    F12 → Console
    → Screenshot any red errors
    ```
 
 4. **Enabled Modules**
+
    ```
    List of other enabled modules
    → Especially UI-related ones
@@ -710,9 +754,10 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 
 ### Reporting Bugs
 
-**GitHub Issues**: [Create Issue](https://github.com/yourusername/loading-screen/issues)
+**GitHub Issues**: [Create Issue](https://github.com/NoWitchCraft/loading-screen/issues)
 
 **Include**:
+
 - ✅ Foundry version
 - ✅ Module version
 - ✅ Console errors (screenshot)
@@ -722,6 +767,7 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 - ✅ List of other modules
 
 **Template**:
+
 ```markdown
 **Foundry Version**: 11.315
 **Module Version**: 2.3.0
@@ -730,6 +776,7 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 **Issue**: Loading screen not appearing
 
 **Steps**:
+
 1. Enable module
 2. Switch to scene "Test Scene"
 3. Old popup appears instead
@@ -738,6 +785,7 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 [paste errors or "none"]
 
 **Other Modules**:
+
 - Module A v1.0
 - Module B v2.0
 
@@ -748,11 +796,13 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 ### Community Support
 
 **Foundry Discord**:
+
 - #modules channel
 - Ask for help
 - Share screenshots
 
 **Reddit**:
+
 - r/FoundryVTT
 - Include details
 - Mark as solved when fixed
@@ -761,30 +811,30 @@ ui.notifications.info('Settings reset! Reload page (F5)');
 
 ### Common Fixes
 
-| Problem | Quick Fix |
-|---------|-----------|
-| Not appearing | Check enabled, reload |
-| Wrong template | Hard reload (Ctrl+F5) |
-| No images | Check folder path |
-| Tips missing | Enable in settings |
-| Slow performance | Optimize images |
-| Errors | Check console (F12) |
+| Problem          | Quick Fix             |
+| ---------------- | --------------------- |
+| Not appearing    | Check enabled, reload |
+| Wrong template   | Hard reload (Ctrl+F5) |
+| No images        | Check folder path     |
+| Tips missing     | Enable in settings    |
+| Slow performance | Optimize images       |
+| Errors           | Check console (F12)   |
 
 ### Emergency Commands
 
 ```javascript
 // Force enable
-await game.settings.set('loading-screen', 'enabled', true);
+await game.settings.set("loading-screen", "enabled", true);
 
 // Reset template
-await game.settings.set('loading-screen', 'template', 'standard');
+await game.settings.set("loading-screen", "template", "standard");
 
 // Clear custom content
-await game.settings.set('loading-screen', 'customTips', '');
-await game.settings.set('loading-screen', 'imageFolder', '');
-await game.settings.set('loading-screen', 'sceneFolders', {});
+await game.settings.set("loading-screen", "customTips", "");
+await game.settings.set("loading-screen", "imageFolder", "");
+await game.settings.set("loading-screen", "sceneFolders", {});
 ```
 
 ---
 
-**Still having issues?** Open a [GitHub issue](https://github.com/yourusername/loading-screen/issues) with details!
+**Still having issues?** Open a [GitHub issue](https://github.com/NoWitchCraft/loading-screen/issues) with details!
