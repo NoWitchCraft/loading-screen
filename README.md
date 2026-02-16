@@ -67,7 +67,7 @@ Choose from 4 beautiful pre-designed templates:
 3. Paste the Manifest URL:
 
 ```
-https://github.com/yourusername/loading-screen/releases/latest/download/module.json
+https://github.com/NoWitchCraft/loading-screen/releases/latest/download/module.json
 ```
 
 4. Click **Install**
