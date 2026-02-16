@@ -1,0 +1,26 @@
+<div class="tab" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+  <p class="notes">{{localize "LOADING_SCREEN.SceneTabDescription"}}</p>
+  
+  <div class="form-group">
+    <label>{{localize "LOADING_SCREEN.SceneImageFolder"}}</label>
+    <div class="form-fields" style="display: flex; gap: 0.5rem;">
+      <input 
+        type="text" 
+        name="loadingScreen.imageFolder" 
+        value="{{currentFolder}}" 
+        placeholder="{{placeholder}}"
+        style="flex: 1;" 
+      />
+      <button type="button" name="loadingScreen.folderPicker" style="flex-shrink: 0;">
+        <i class="fas fa-folder-open"></i>
+      </button>
+    </div>
+    <p class="notes">{{localize "LOADING_SCREEN.SceneImageFolderHint"}}</p>
+    
+    {{#if defaultFolder}}
+    <p class="notes" style="margin-top: 0.5rem;">
+      <strong>{{localize "LOADING_SCREEN.DefaultFolder"}}:</strong> {{defaultFolder}}
+    </p>
+    {{/if}}
+  </div>
+</div>

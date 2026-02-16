@@ -1,0 +1,711 @@
+/**
+ * Loading Screen System Styles
+ */
+
+#loading-screen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn var(--fade-duration) ease-in;
+}
+
+#loading-screen-overlay.fade-out {
+  animation: fadeOut var(--fade-duration) ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.loading-screen-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.6) blur(2px);
+}
+
+.loading-screen-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  width: 80%;
+  max-width: 800px;
+}
+
+.loading-screen-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-family: 'Signika', 'Palatino Linotype', serif;
+}
+
+.loading-screen-text .scene-name {
+  font-size: 1.5rem;
+  margin: 1rem 0 2rem 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  font-family: 'Signika', 'Palatino Linotype', serif;
+}
+
+.loading-screen-progress {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, 
+    #4a90e2 0%, 
+    #63b3ed 50%, 
+    #4a90e2 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  transition: width 0.3s ease-out;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .loading-screen-text h1 {
+    font-size: 2rem;
+  }
+  
+  .loading-screen-text .scene-name {
+    font-size: 1.2rem;
+  }
+  
+  .loading-screen-content {
+    width: 90%;
+  }
+}
+
+/* Optional: Pulsing Animation für Text */
+.loading-screen-text h1 {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Tipps-Bereich */
+.loading-screen-tips {
+  margin-top: 3rem;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tip-text {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  font-family: 'Signika', 'Palatino Linotype', serif;
+  line-height: 1.6;
+  min-height: 1.8rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Tipp Fade Animationen */
+.tip-text.fade-out-tip {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.tip-text.fade-in-tip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Loading Screen Config Dialog */
+#loading-screen-config {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#loading-screen-config .tabs {
+  border-bottom: 2px solid var(--color-border-dark);
+  margin-bottom: 1rem;
+}
+
+#loading-screen-config .tabs .item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+#loading-screen-config .tabs .item.active {
+  border-bottom-color: var(--color-border-highlight);
+}
+
+#loading-screen-config .notes {
+  background: var(--color-bg-option);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+#loading-screen-config .scene-folder-group {
+  border-bottom: 1px solid var(--color-border-light);
+  padding: 0.75rem 0;
+}
+
+#loading-screen-config .scene-folder-group:last-child {
+  border-bottom: none;
+}
+
+#loading-screen-config .folder-input-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#loading-screen-config .folder-input-group input {
+  flex: 1;
+}
+
+#loading-screen-config .folder-picker {
+  padding: 0.5rem;
+  background: var(--color-bg-btn);
+  border: 1px solid var(--color-border-dark);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#loading-screen-config .folder-picker:hover {
+  background: var(--color-bg-btn-hover);
+}
+
+#loading-screen-config .help-content {
+  padding: 0 1rem;
+}
+
+#loading-screen-config .help-content h3 {
+  border-bottom: 2px solid var(--color-border-dark);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#loading-screen-config .help-content h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-dark-primary);
+}
+
+#loading-screen-config .help-content ul,
+#loading-screen-config .help-content ol {
+  margin-left: 1.5rem;
+}
+
+#loading-screen-config .help-content li {
+  margin-bottom: 0.5rem;
+}
+
+#loading-screen-config .sheet-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-dark);
+  text-align: right;
+}
+
+#loading-screen-config .sheet-footer button {
+  padding: 0.5rem 1.5rem;
+}
+
+/* Leuchtender Effekt für Tipps */
+.loading-screen-tips::before {
+  content: '💡';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(255, 220, 100, 0.8));
+  }
+  50% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 10px rgba(255, 220, 100, 1));
+  }
+}
+
+.loading-screen-tips {
+  position: relative;
+  padding-left: 3.5rem;
+}
+
+/* Custom Tips Config Dialog */
+#custom-tips-config textarea {
+  width: 100%;
+  min-height: 300px;
+  font-family: monospace;
+  resize: vertical;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border-dark);
+  border-radius: 4px;
+  background: var(--color-bg-option);
+}
+
+#custom-tips-config .hint {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-dark-secondary);
+}
+
+#custom-tips-config .sheet-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-dark);
+  text-align: right;
+}
+
+#custom-tips-config .sheet-footer button {
+  padding: 0.5rem 1.5rem;
+}
+
+/* Scene Config Tab */
+.sheet .tab[data-tab="loading-screen"] .notes {
+  background: var(--color-bg-option);
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.sheet .tab[data-tab="loading-screen"] .form-fields {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sheet .tab[data-tab="loading-screen"] .form-fields input {
+  flex: 1;
+}
+
+.sheet .tab[data-tab="loading-screen"] .file-picker {
+  flex-shrink: 0;
+}
+
+/* V13 Dialog für Scene Loading Screen */
+.dialog .form-fields {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.dialog .form-fields input[type="text"] {
+  flex: 1;
+}
+
+.dialog .form-fields button {
+  flex-shrink: 0;
+  padding: 0.5rem;
+}
+
+/* ============================================
+   TEMPLATE STYLES
+   ============================================ */
+
+/* Minimalist Template */
+.loading-template-minimalist {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.loading-template-minimalist .loading-screen-background {
+  opacity: 0.3;
+  filter: blur(5px) grayscale(50%);
+}
+
+.minimalist-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.minimalist-text h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  color: white;
+}
+
+.minimalist-progress {
+  width: 300px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.minimalist-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: width 0.3s ease-out;
+}
+
+.minimalist-tips {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 600px;
+  text-align: center;
+}
+
+.minimalist-tips p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Cinematic Template */
+.loading-template-cinematic {
+  background: #000;
+}
+
+.cinematic-bg {
+  filter: brightness(0.4) contrast(1.2);
+}
+
+.cinematic-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.8) 0%,
+    rgba(0,0,0,0.3) 50%,
+    rgba(0,0,0,0.8) 100%
+  );
+  z-index: 1;
+}
+
+.cinematic-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 150px 50px rgba(0,0,0,0.8);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cinematic-content {
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.cinematic-header {
+  text-align: center;
+}
+
+.cinematic-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+               0 4px 8px rgba(0, 0, 0, 0.8);
+  margin-bottom: 1rem;
+}
+
+.cinematic-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.cinematic-progress {
+  width: 400px;
+}
+
+.cinematic-progress-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cinematic-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #fff 0%, #aaa 100%);
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cinematic-tips {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cinematic-tips .tip-icon {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.cinematic-tip-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Fantasy Template */
+.loading-template-fantasy {
+  background: #1a0f0a;
+}
+
+.fantasy-bg {
+  filter: brightness(0.5) sepia(30%);
+}
+
+.fantasy-border-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 20px solid;
+  border-image: linear-gradient(
+    45deg,
+    rgba(139, 69, 19, 0.6),
+    rgba(210, 180, 140, 0.8),
+    rgba(139, 69, 19, 0.6)
+  ) 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fantasy-content {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fantasy-scroll {
+  background: rgba(245, 235, 210, 0.95);
+  border: 3px solid #8b4513;
+  border-radius: 8px;
+  padding: 3rem;
+  max-width: 600px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8),
+              inset 0 0 20px rgba(139, 69, 19, 0.2);
+  position: relative;
+}
+
+.fantasy-scroll::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 69, 19, 0.03) 2px,
+      rgba(139, 69, 19, 0.03) 4px
+    );
+  pointer-events: none;
+}
+
+.fantasy-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fantasy-ornament {
+  font-size: 1.5rem;
+  color: #8b4513;
+}
+
+.fantasy-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4a2511;
+  text-align: center;
+  margin: 0;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  text-shadow: 2px 2px 0 rgba(139, 69, 19, 0.2);
+}
+
+.fantasy-location {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+.location-label {
+  font-size: 0.9rem;
+  color: #8b4513;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.location-name {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c1810;
+  margin-top: 0.5rem;
+}
+
+.fantasy-progress {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.fantasy-progress-bar {
+  height: 12px;
+  background: rgba(139, 69, 19, 0.2);
+  border: 2px solid #8b4513;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fantasy-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #8b4513 0%, #d4a574 50%, #8b4513 100%);
+  transition: width 0.3s ease-out;
+}
+
+.fantasy-progress-corners {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+}
+
+.fantasy-progress-corners .corner {
+  position: absolute;
+  color: #8b4513;
+  font-size: 0.8rem;
+}
+
+.fantasy-progress-corners .top-left { top: 0; left: 0; }
+.fantasy-progress-corners .top-right { top: 0; right: 0; }
+.fantasy-progress-corners .bottom-left { bottom: 0; left: 0; }
+.fantasy-progress-corners .bottom-right { bottom: 0; right: 0; }
+
+.fantasy-tips {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(139, 69, 19, 0.3);
+}
+
+.fantasy-tips .tip-header {
+  text-align: center;
+  font-size: 1rem;
+  color: #8b4513;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.fantasy-tip-text {
+  font-size: 0.95rem;
+  color: #4a2511;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}

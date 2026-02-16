@@ -1,0 +1,79 @@
+<form class="loading-screen-config">
+  <nav class="sheet-tabs tabs" data-group="primary-tabs">
+    <a class="item" data-tab="scenes">
+      <i class="fas fa-map"></i> {{localize "LOADING_SCREEN.TabScenes"}}
+    </a>
+    <a class="item" data-tab="help">
+      <i class="fas fa-question-circle"></i> {{localize "LOADING_SCREEN.TabHelp"}}
+    </a>
+  </nav>
+
+  <section class="tab" data-tab="scenes">
+    <p class="notes">
+      {{localize "LOADING_SCREEN.ConfigDescription"}}
+    </p>
+
+    <div class="form-group">
+      <label>{{localize "LOADING_SCREEN.DefaultFolder"}}</label>
+      <div class="form-fields">
+        <input type="text" name="default-folder" value="{{defaultFolder}}" placeholder="{{localize 'LOADING_SCREEN.DefaultFolderPlaceholder'}}" disabled />
+        <p class="hint">{{localize "LOADING_SCREEN.DefaultFolderHint"}}</p>
+      </div>
+    </div>
+
+    <hr/>
+
+    <h3>{{localize "LOADING_SCREEN.SceneFolders"}}</h3>
+    
+    <div class="scene-list">
+      {{#each scenes}}
+      <div class="form-group scene-folder-group">
+        <label>
+          <i class="fas fa-map"></i> {{this.name}}
+        </label>
+        <div class="form-fields folder-input-group">
+          <input type="text" name="scene-{{this.id}}" value="{{this.folder}}" placeholder="{{localize 'LOADING_SCREEN.UseDefaultFolder'}}" data-dtype="String" />
+          <button type="button" class="folder-picker" data-scene="{{this.id}}">
+            <i class="fas fa-folder-open"></i>
+          </button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  <section class="tab" data-tab="help">
+    <div class="help-content">
+      <h3><i class="fas fa-info-circle"></i> {{localize "LOADING_SCREEN.HelpTitle"}}</h3>
+      
+      <h4>{{localize "LOADING_SCREEN.HelpFolderSetup"}}</h4>
+      <ol>
+        <li>{{localize "LOADING_SCREEN.HelpStep1"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpStep2"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpStep3"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpStep4"}}</li>
+      </ol>
+
+      <h4>{{localize "LOADING_SCREEN.HelpBehavior"}}</h4>
+      <ul>
+        <li>{{localize "LOADING_SCREEN.HelpBehavior1"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpBehavior2"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpBehavior3"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpBehavior4"}}</li>
+      </ul>
+
+      <h4>{{localize "LOADING_SCREEN.HelpTips"}}</h4>
+      <ul>
+        <li>{{localize "LOADING_SCREEN.HelpTip1"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpTip2"}}</li>
+        <li>{{localize "LOADING_SCREEN.HelpTip3"}}</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="sheet-footer">
+    <button type="submit" name="submit">
+      <i class="fas fa-save"></i> {{localize "LOADING_SCREEN.Save"}}
+    </button>
+  </footer>
+</form>

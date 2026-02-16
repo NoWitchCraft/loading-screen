@@ -1,0 +1,19 @@
+<!-- Minimalist Loading Screen Template -->
+<div id="loading-screen-overlay" class="loading-template-minimalist" style="--fade-duration: {{fadeDuration}}s;">
+  <div class="loading-screen-background" style="background-image: url('{{backgroundImage}}');"></div>
+  <div class="loading-screen-content minimalist-content">
+    <div class="minimalist-text">
+      <h1>{{sceneName}}</h1>
+      {{#if showProgress}}
+      <div class="minimalist-progress">
+        <div class="minimalist-progress-bar" id="loading-progress-fill"></div>
+      </div>
+      {{/if}}
+    </div>
+    {{#if showTips}}
+    <div class="minimalist-tips">
+      <p id="loading-tip-text">{{currentTip}}</p>
+    </div>
+    {{/if}}
+  </div>
+</div>

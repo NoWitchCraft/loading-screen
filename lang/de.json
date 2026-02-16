@@ -1,0 +1,87 @@
+{
+  "LOADING_SCREEN": {
+    "Loading": "Wird geladen...",
+    "DefaultText": "Neue Szene wird geladen",
+    
+    "SettingEnabled": "Loading Screen aktivieren",
+    "SettingEnabledHint": "Zeigt den benutzerdefinierten Loading Screen beim Wechseln von Szenen an.",
+    
+    "SettingImageFolder": "Standard Bilder-Ordner",
+    "SettingImageFolderHint": "Wähle einen Ordner mit Bildern für den Loading Screen. Wenn eine Scene keinen eigenen Ordner hat, wird dieser verwendet.",
+    
+    "SettingCustomText": "Benutzerdefinierter Text",
+    "SettingCustomTextHint": "Der Text, der auf dem Loading Screen angezeigt wird.",
+    
+    "SettingShowProgress": "Fortschrittsbalken anzeigen",
+    "SettingShowProgressHint": "Zeigt einen animierten Fortschrittsbalken während des Ladens an.",
+    
+    "SettingFadeDuration": "Fade-Dauer (Sekunden)",
+    "SettingFadeDurationHint": "Wie lange das Ein- und Ausblenden des Loading Screens dauert.",
+    
+    "SettingShowTips": "Tipps anzeigen",
+    "SettingShowTipsHint": "Zeigt zufällige Tipps während des Ladens an.",
+    
+    "SettingTipRotation": "Tipp-Rotation (Sekunden)",
+    "SettingTipRotationHint": "Wie oft ein neuer Tipp angezeigt wird (bei längeren Ladezeiten).",
+    
+    "SettingTemplate": "Loading Screen Design",
+    "SettingTemplateHint": "Wähle das Design/Template für den Loading Screen.",
+    
+    "TemplateStandard": "Standard (Original)",
+    "TemplateMinimalist": "Minimalistisch",
+    "TemplateCinematic": "Cinematic",
+    "TemplateFantasy": "Fantasy/RPG",
+    
+    "SettingCustomTips": "Benutzerdefinierte Tipps",
+    "SettingCustomTipsHint": "Eigene Tipps erstellen (ein Tipp pro Zeile). Wenn leer, werden Standard-Tipps verwendet.",
+    "EditCustomTips": "Tipps bearbeiten",
+    
+    "CustomTipsTitle": "Benutzerdefinierte Tipps bearbeiten",
+    "CustomTipsLabel": "Deine Tipps",
+    "CustomTipsDescription": "Gib hier deine eigenen Tipps ein, einen pro Zeile. Diese ersetzen die Standard-Tipps. Lasse das Feld leer, um die Standard-Tipps zu verwenden.",
+    "CustomTipsPlaceholder": "Tipp: Dein erster eigener Tipp\nTipp: Noch ein Tipp\nTipp: Und noch einer...",
+    "CustomTipsHelp": "Jede Zeile = ein Tipp. Leerzeilen werden ignoriert.",
+    "CustomTipsSaved": "Benutzerdefinierte Tipps gespeichert!",
+    
+    "SceneTab": "Loading Screen",
+    "SceneTabDescription": "Konfiguriere den Loading Screen speziell für diese Scene. Bei mehreren Bildern im Ordner wird zufällig eines ausgewählt.",
+    "SceneImageFolder": "Bilder-Ordner für diese Scene",
+    "SceneImageFolderHint": "Leer lassen um den Standard-Ordner zu verwenden. Bei mehreren Bildern wird zufällig eines beim Laden ausgewählt.",
+    "SceneFolderSaved": "Loading Screen Ordner für Scene gespeichert!",
+    "ConfigureLoadingScreen": "Loading Screen konfigurieren",
+    
+    "ConfigTitle": "Loading Screen - Scene-Ordner konfigurieren",
+    "ConfigDescription": "Hier kannst du für jede Scene einen eigenen Bildordner festlegen. Bilder aus dem Ordner werden zufällig als Hintergrund verwendet. Bei mehreren Bildern wird bei jedem Laden ein zufälliges ausgewählt.",
+    "ConfigSaved": "Loading Screen Konfiguration gespeichert!",
+    
+    "TabScenes": "Szenen",
+    "TabHelp": "Hilfe",
+    
+    "DefaultFolder": "Standard-Ordner",
+    "DefaultFolderPlaceholder": "z.B. worlds/meine-welt/images/loading",
+    "DefaultFolderHint": "Dieser Ordner wird in den allgemeinen Einstellungen festgelegt.",
+    
+    "SceneFolders": "Scene-spezifische Ordner",
+    "UseDefaultFolder": "Standard-Ordner verwenden",
+    
+    "HelpTitle": "Anleitung",
+    "HelpFolderSetup": "Ordner einrichten",
+    "HelpStep1": "Erstelle einen Ordner in deiner Foundry-Installation mit Loading-Screen-Bildern",
+    "HelpStep2": "Setze den 'Standard Bilder-Ordner' in den Modul-Einstellungen",
+    "HelpStep3": "Optional: Konfiguriere hier individuelle Ordner für bestimmte Scenes",
+    "HelpStep4": "Klicke auf das Ordner-Icon um einen Ordner auszuwählen",
+    
+    "HelpBehavior": "Verhalten",
+    "HelpBehavior1": "Wenn eine Scene einen eigenen Ordner hat, werden nur Bilder daraus verwendet",
+    "HelpBehavior2": "Ohne Scene-Ordner wird der Standard-Ordner verwendet",
+    "HelpBehavior3": "Bei mehreren Bildern wird zufällig eines ausgewählt",
+    "HelpBehavior4": "Bei nur einem Bild wird dieses immer verwendet",
+    
+    "HelpTips": "Tipps",
+    "HelpTip1": "Verwende Bilder mit 1920x1080px für beste Ergebnisse",
+    "HelpTip2": "Unterstützte Formate: JPG, PNG, WEBP, GIF",
+    "HelpTip3": "Organisiere Bilder thematisch (z.B. 'dungeon', 'stadt', 'wildnis')",
+    
+    "Save": "Speichern"
+  }
+}

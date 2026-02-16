@@ -1,0 +1,42 @@
+{
+  "id": "nwc-loadingscreen",
+  "title": "Loading Screen System",
+  "description": "Showing a loading Screen while a new Scene is loading.",
+  "version": "2.3.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "13",
+    "maximum": "13.999"
+  },
+  "authors": [
+    {
+      "name": "NoWitchCraft",
+      "discord": "nowitchcraft"
+    }
+  ],
+  "esmodules": [
+    "scripts/lib/lib-wrapper-shim.js",
+    "scripts/tips-de.js",
+    "scripts/tips-en.js",
+    "scripts/config.js",
+    "scripts/scene-config.js",
+    "scripts/loading-screen.js"
+  ],
+  "styles": [
+    "styles/loading-screen.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    }
+  ],
+  "url": "https://github.com/NoWitchCraft/nwc-loading-screen",
+  "manifest": "https://raw.githubusercontent.com/NoWitchCraft/nwc-loading-screen/refs/heads/main/module.json"
+}

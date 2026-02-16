@@ -1,0 +1,25 @@
+<!-- Cinematic Loading Screen Template -->
+<div id="loading-screen-overlay" class="loading-template-cinematic" style="--fade-duration: {{fadeDuration}}s;">
+  <div class="loading-screen-background cinematic-bg" style="background-image: url('{{backgroundImage}}');"></div>
+  <div class="cinematic-overlay"></div>
+  <div class="loading-screen-content cinematic-content">
+    <div class="cinematic-header">
+      <div class="cinematic-title">{{customText}}</div>
+      <div class="cinematic-subtitle">{{sceneName}}</div>
+    </div>
+    {{#if showProgress}}
+    <div class="cinematic-progress">
+      <div class="cinematic-progress-track">
+        <div class="cinematic-progress-fill" id="loading-progress-fill"></div>
+      </div>
+    </div>
+    {{/if}}
+    {{#if showTips}}
+    <div class="cinematic-tips">
+      <div class="tip-icon">💡</div>
+      <p id="loading-tip-text" class="cinematic-tip-text">{{currentTip}}</p>
+    </div>
+    {{/if}}
+  </div>
+  <div class="cinematic-vignette"></div>
+</div>

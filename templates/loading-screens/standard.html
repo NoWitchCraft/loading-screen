@@ -1,0 +1,22 @@
+<!-- Standard Loading Screen Template -->
+<div id="loading-screen-overlay" class="loading-template-standard" style="--fade-duration: {{fadeDuration}}s;">
+  <div class="loading-screen-background" style="background-image: url('{{backgroundImage}}');"></div>
+  <div class="loading-screen-content">
+    <div class="loading-screen-text">
+      <h1>{{customText}}</h1>
+      <p class="scene-name">{{sceneName}}</p>
+    </div>
+    {{#if showProgress}}
+    <div class="loading-screen-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" id="loading-progress-fill"></div>
+      </div>
+    </div>
+    {{/if}}
+    {{#if showTips}}
+    <div class="loading-screen-tips">
+      <p id="loading-tip-text" class="tip-text">{{currentTip}}</p>
+    </div>
+    {{/if}}
+  </div>
+</div>

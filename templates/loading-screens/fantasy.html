@@ -1,0 +1,37 @@
+<!-- Fantasy/RPG Loading Screen Template -->
+<div id="loading-screen-overlay" class="loading-template-fantasy" style="--fade-duration: {{fadeDuration}}s;">
+  <div class="loading-screen-background fantasy-bg" style="background-image: url('{{backgroundImage}}');"></div>
+  <div class="fantasy-border-overlay"></div>
+  <div class="loading-screen-content fantasy-content">
+    <div class="fantasy-scroll">
+      <div class="fantasy-header">
+        <div class="fantasy-ornament">⚔️</div>
+        <h1 class="fantasy-title">{{customText}}</h1>
+        <div class="fantasy-ornament">⚔️</div>
+      </div>
+      <div class="fantasy-location">
+        <span class="location-label">Entering:</span>
+        <span class="location-name">{{sceneName}}</span>
+      </div>
+      {{#if showProgress}}
+      <div class="fantasy-progress">
+        <div class="fantasy-progress-bar">
+          <div class="fantasy-progress-fill" id="loading-progress-fill"></div>
+        </div>
+        <div class="fantasy-progress-corners">
+          <span class="corner top-left">◆</span>
+          <span class="corner top-right">◆</span>
+          <span class="corner bottom-left">◆</span>
+          <span class="corner bottom-right">◆</span>
+        </div>
+      </div>
+      {{/if}}
+      {{#if showTips}}
+      <div class="fantasy-tips">
+        <div class="tip-header">✦ Wisdom ✦</div>
+        <p id="loading-tip-text" class="fantasy-tip-text">{{currentTip}}</p>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
