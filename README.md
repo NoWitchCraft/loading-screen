@@ -74,7 +74,7 @@ https://github.com/NoWitchCraft/loading-screen/releases/latest/download/module.j
 
 ### Method 2: Manual Installation
 
-1. Download the latest release from [Releases](https://github.com/yourusername/loading-screen/releases)
+1. Download the latest release from [Releases](https://github.com/NoWitchCraft/loading-screen/releases)
 2. Extract the zip file to your `Data/modules` folder
 3. Restart Foundry VTT
 4. Enable the module in your world
