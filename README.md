@@ -253,7 +253,7 @@ Found a bug? Please report it:
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-### Latest (v2.3.0)
+### Latest Major Version (v2.3.0)
 
 - ✨ Template system with 4 professional designs
 - 🎨 Standard, Minimalist, Cinematic, and Fantasy templates
