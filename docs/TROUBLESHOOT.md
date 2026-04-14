@@ -595,6 +595,131 @@ Or use one or the other
 - Update module
 - Test thoroughly
 
+## New Features Issues
+
+### Scene Name Display Problems
+
+**Symptoms**: Wrong scene name shown during loading
+
+**Check**:
+
+1. **Setting Value**
+
+   ```javascript
+   console.log(game.settings.get("loading-screen", "sceneNameSource"));
+   // Should be "hidden" or "navigation"
+   ```
+
+2. **Scene Has Navigation Name?**
+
+   ```javascript
+   const scene = game.scenes.get("scene-id");
+   console.log("Hidden name:", scene.name);
+   console.log("Navigation name:", scene.navigation?.name || scene.navName);
+   ```
+
+**Solutions**:
+
+```javascript
+// Set to navigation name
+await game.settings.set("loading-screen", "sceneNameSource", "navigation");
+
+// Set to hidden name (default)
+await game.settings.set("loading-screen", "sceneNameSource", "hidden");
+```
+
+### Notifications Still Showing
+
+**Symptoms**: Notifications appear during loading despite setting
+
+**Check**:
+
+1. **Setting Enabled?**
+
+   ```javascript
+   console.log(game.settings.get("loading-screen", "blockNotifications"));
+   // Should be true
+   ```
+
+2. **CSS Applied?**
+
+   ```
+   F12 → Elements
+   → Search for "loading-screen-hide-default"
+   → Should exist during loading
+   ```
+
+**Solutions**:
+
+```javascript
+// Force enable notification blocking
+await game.settings.set("loading-screen", "blockNotifications", true);
+
+// Disable to show notifications
+await game.settings.set("loading-screen", "blockNotifications", false);
+```
+
+### Foundry Version Compatibility Issues
+
+**Symptoms**: Errors after Foundry update or module not working
+
+**Check Foundry Version**:
+
+```javascript
+console.log("Foundry version:", game.version);
+console.log("Major version:", game.version.split(".")[0]);
+```
+
+**Supported Versions**: V11, V12, V13, V14
+
+**Solutions**:
+
+1. **Update Module**
+   - Check for latest version
+   - Update if available
+
+2. **Clear Cache**
+   ```
+   Ctrl+Shift+Delete → Clear cached images and files
+   Hard reload: Ctrl+F5
+   ```
+
+3. **Reinstall Module**
+   - Backup settings
+   - Delete module folder
+   - Reinstall fresh
+
+4. **Check Console Errors**
+   ```
+   F12 → Console
+   Look for API compatibility errors
+   ```
+
+### FilePicker Not Working
+
+**Symptoms**: Can't select folders in settings
+
+**Check**:
+
+1. **Foundry Version**
+   - V11-V14 should work
+   - Older versions not supported
+
+2. **Browser Permissions**
+   - File access enabled?
+   - Try different browser
+
+**Solutions**:
+
+```javascript
+// Manual folder setting
+await game.settings.set(
+  "loading-screen",
+  "imageFolder",
+  "worlds/my-world/images/loading",
+);
+```
+
 ## Error Messages
 
 ### "Template not found"

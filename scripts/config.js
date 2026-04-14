@@ -1,6 +1,8 @@
 /**
  * Konfigurationsformular für Scene-spezifische Bildordner
  */
+import { openFolderPicker } from "./compat.js";
+
 export class LoadingScreenConfig extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -43,17 +45,9 @@ export class LoadingScreenConfig extends FormApplication {
     const button = event.currentTarget;
     const input = button.previousElementSibling;
 
-    // V13 kompatible FilePicker
-    const FilePicker =
-      foundry.applications?.apps?.FilePicker?.implementation ||
-      window.FilePicker;
-    new FilePicker({
-      type: "folder",
-      current: input.value,
-      callback: (path) => {
-        input.value = path;
-      },
-    }).browse();
+    await openFolderPicker(input.value, (path) => {
+      input.value = path;
+    });
   }
 
   async _updateObject(event, formData) {

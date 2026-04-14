@@ -26,7 +26,15 @@
     
     "SettingTemplate": "Loading Screen Design",
     "SettingTemplateHint": "Wähle das Design/Template für den Loading Screen.",
-    
+
+    "SettingBlockNotifications": "Benachrichtigungen während des Ladens blocken",
+    "SettingBlockNotificationsHint": "Wenn aktiviert, werden Info-Benachrichtigungen während des Ladebildschirms ausgeblendet.",
+
+    "SettingSceneNameSource": "Angezeigter Szenenname",
+    "SettingSceneNameSourceHint": "Wähle, ob Spieler beim Laden den versteckten Szenennamen oder den Navigationsnamen der Szene sehen.",
+    "SceneNameHidden": "Versteckter Szenenname",
+    "SceneNameNavigation": "Navigationsname",
+
     "TemplateStandard": "Standard (Original)",
     "TemplateMinimalist": "Minimalistisch",
     "TemplateCinematic": "Cinematic",

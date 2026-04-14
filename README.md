@@ -3,7 +3,7 @@
 A professional, customizable loading screen system for Foundry VTT that replaces the default loading popup with beautiful, themed loading screens.
 
 ![Foundry VTT](https://img.shields.io/badge/Foundry%20VTT-11%2B-green)
-![Version](https://img.shields.io/badge/version-2.3.0-blue)
+![Version](https://img.shields.io/badge/version-2.3.1-blue)
 ![License](https://img.shields.io/badge/license-Apache%202.0-orange)
 
 ## ✨ Features
@@ -38,12 +38,14 @@ Choose from 4 beautiful pre-designed templates:
 - Template-specific designs
 - Optional (can be disabled)
 
-### ⚙️ **Highly Customizable**
+### 🔧 **Highly Customizable**
 
 - Custom loading text
 - Adjustable fade duration
 - Scene-specific configurations
 - Template selection per preference
+- Choose between hidden or navigation scene names
+- Control notification visibility during loading
 
 ### 🌍 **Multilingual**
 
@@ -56,7 +58,7 @@ Choose from 4 beautiful pre-designed templates:
 - lib-wrapper integration for compatibility
 - Scene Config tab integration
 - Clean, modular code structure
-- Foundry VTT V11-V13 compatible
+- Foundry VTT V11-V14 compatible
 
 ## 📦 Installation
 
@@ -155,6 +157,8 @@ Navigate to **Module Settings** → **Loading Screen System**:
 | Fade Duration         | Animation speed (seconds)     | 0.5                 |
 | Show Tips             | Display tips                  | ✅ On               |
 | Tip Rotation          | Tip change interval (seconds) | 5                   |
+| Block Notifications   | Hide notifications during loading | ✅ On            |
+| Scene Name Display    | Show hidden or navigation name | Hidden Scene Name   |
 
 ### Scene-Specific Settings
 
@@ -176,7 +180,7 @@ Click **"Edit Tips"** button in Module Settings:
 ### Requirements
 
 - **Foundry VTT**: Version 11 or higher
-- **Verified**: V11, V12, V13
+- **Verified**: V11, V12, V13, V14
 
 ### Dependencies
 
@@ -249,7 +253,7 @@ Found a bug? Please report it:
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-### Latest (v2.3.0)
+### Latest Major Version (v2.3.0)
 
 - ✨ Template system with 4 professional designs
 - 🎨 Standard, Minimalist, Cinematic, and Fantasy templates

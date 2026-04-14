@@ -1,4 +1,5 @@
 import { libWrapper } from "./lib/lib-wrapper-shim.js";
+import { openFolderPicker } from "./compat.js";
 
 export function registerSceneConfigTab() {
   const moduleName = "loading-screen";
@@ -15,11 +16,19 @@ export function registerSceneConfigTab() {
   };
 
   // Füge den Tab hinzu
-  foundry.applications.sheets.SceneConfig.TABS.sheet.tabs.push({
-    id: "loadingScreen",
-    icon: "fas fa-image",
-    label: "LOADING_SCREEN.SceneTab",
-  });
+  if (foundry.applications?.sheets?.SceneConfig?.TABS?.sheet?.tabs) {
+    foundry.applications.sheets.SceneConfig.TABS.sheet.tabs.push({
+      id: "loadingScreen",
+      icon: "fas fa-image",
+      label: "LOADING_SCREEN.SceneTab",
+    });
+  } else if (foundry.applications?.sheets?.SceneConfig?.tabs) {
+    foundry.applications.sheets.SceneConfig.tabs.push({
+      id: "loadingScreen",
+      icon: "fas fa-image",
+      label: "LOADING_SCREEN.SceneTab",
+    });
+  }
 
   /**
    * Prepare context für unseren Tab
@@ -104,21 +113,13 @@ export function registerSceneConfigTab() {
         'button[name="loadingScreen.folderPicker"]',
       );
       if (folderPickerBtn) {
-        folderPickerBtn.addEventListener("click", () => {
+        folderPickerBtn.addEventListener("click", async () => {
           const input = this.element.querySelector(
             'input[name="loadingScreen.imageFolder"]',
           );
-          const FilePicker =
-            foundry.applications?.apps?.FilePicker?.implementation ||
-            window.FilePicker;
-
-          new FilePicker({
-            type: "folder",
-            current: input.value,
-            callback: (path) => {
-              input.value = path;
-            },
-          }).browse();
+          await openFolderPicker(input.value, (path) => {
+            input.value = path;
+          });
         });
       }
 
