@@ -14,6 +14,7 @@ class LoadingScreenManager {
     ENABLED: "enabled",
     IMAGE_FOLDER: "imageFolder",
     SCENE_FOLDERS: "sceneFolders",
+    SCENE_NAME_SOURCE: "sceneNameSource",
     CUSTOM_TEXT: "customText",
     SHOW_PROGRESS: "showProgress",
     FADE_DURATION: "fadeDuration",
@@ -63,6 +64,14 @@ class LoadingScreenManager {
     // Verwende Default-Tipps basierend auf Sprache
     console.log("Loading Screen | Using default tips for language:", language);
     return this.DEFAULT_TIPS[language] || this.DEFAULT_TIPS.en;
+  }
+
+  static getSceneName(scene) {
+    const source = game.settings.get(this.ID, this.SETTINGS.SCENE_NAME_SOURCE);
+    const hiddenName = scene?.name;
+    const navigationName = scene?.navigation?.name || scene?.navName || hiddenName;
+
+    return source === "navigation" ? navigationName || hiddenName : hiddenName || navigationName;
   }
 
   /**
@@ -249,6 +258,20 @@ class LoadingScreenManager {
       },
     });
 
+    // Angezeigter Szenenname
+    game.settings.register(namespace, this.SETTINGS.SCENE_NAME_SOURCE, {
+      name: "LOADING_SCREEN.SettingSceneNameSource",
+      hint: "LOADING_SCREEN.SettingSceneNameSourceHint",
+      scope: "world",
+      config: true,
+      type: String,
+      default: "hidden",
+      choices: {
+        hidden: "LOADING_SCREEN.SceneNameHidden",
+        navigation: "LOADING_SCREEN.SceneNameNavigation",
+      },
+    });
+
     // Tipp-Rotation (Sekunden)
     game.settings.register(namespace, this.SETTINGS.TIP_ROTATION, {
       name: "LOADING_SCREEN.SettingTipRotation",
@@ -329,7 +352,7 @@ class LoadingScreenManager {
     );
     const template = game.settings.get(this.ID, this.SETTINGS.TEMPLATE);
     const sceneName =
-      scene?.name || game.i18n.localize("LOADING_SCREEN.Loading");
+      this.getSceneName(scene) || game.i18n.localize("LOADING_SCREEN.Loading");
 
     // Bereite Tipps vor
     let currentTip = "";

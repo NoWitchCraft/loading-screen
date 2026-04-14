@@ -26,7 +26,12 @@
     
     "SettingTemplate": "Loading Screen Design",
     "SettingTemplateHint": "Choose the design/template for the loading screen.",
-    
+
+    "SettingSceneNameSource": "Scene Name Display",
+    "SettingSceneNameSourceHint": "Choose whether players see the hidden scene name or the navigation name while loading.",
+    "SceneNameHidden": "Hidden Scene Name",
+    "SceneNameNavigation": "Navigation Name",
+
     "TemplateStandard": "Standard (Original)",
     "TemplateMinimalist": "Minimalist",
     "TemplateCinematic": "Cinematic",
