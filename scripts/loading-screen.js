@@ -15,6 +15,7 @@ class LoadingScreenManager {
     IMAGE_FOLDER: "imageFolder",
     SCENE_FOLDERS: "sceneFolders",
     SCENE_NAME_SOURCE: "sceneNameSource",
+    BLOCK_NOTIFICATIONS: "blockNotifications",
     CUSTOM_TEXT: "customText",
     SHOW_PROGRESS: "showProgress",
     FADE_DURATION: "fadeDuration",
@@ -258,6 +259,16 @@ class LoadingScreenManager {
       },
     });
 
+    // Notifications während des Ladens blocken
+    game.settings.register(namespace, this.SETTINGS.BLOCK_NOTIFICATIONS, {
+      name: "LOADING_SCREEN.SettingBlockNotifications",
+      hint: "LOADING_SCREEN.SettingBlockNotificationsHint",
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
+
     // Angezeigter Szenenname
     game.settings.register(namespace, this.SETTINGS.SCENE_NAME_SOURCE, {
       name: "LOADING_SCREEN.SettingSceneNameSource",
@@ -325,7 +336,13 @@ class LoadingScreenManager {
     // Standard-Loading-Dialog unterdrücken
     Hooks.on("renderSceneNavigation", () => {
       if (!game.settings.get(this.ID, this.SETTINGS.ENABLED)) return;
-      this.hideDefaultLoading();
+      const blockNotifications = game.settings.get(
+        this.ID,
+        this.SETTINGS.BLOCK_NOTIFICATIONS,
+      );
+      if (blockNotifications) {
+        this.hideDefaultLoading();
+      }
     });
   }
 
@@ -364,6 +381,11 @@ class LoadingScreenManager {
       currentTip = this._currentTips[this._currentTipIndex];
     }
 
+    const blockNotifications = game.settings.get(
+      this.ID,
+      this.SETTINGS.BLOCK_NOTIFICATIONS,
+    );
+
     // Template-Daten vorbereiten
     const templateData = {
       backgroundImage,
@@ -378,6 +400,10 @@ class LoadingScreenManager {
     // Lade und rendere Template
     const loadingHTML = await this.renderTemplate(template, templateData);
     $("body").append(loadingHTML);
+
+    if (blockNotifications) {
+      this.hideDefaultLoading();
+    }
 
     // Simuliere Fortschritt (optional)
     if (showProgress) {
@@ -429,20 +455,32 @@ class LoadingScreenManager {
         game.settings.get(this.ID, this.SETTINGS.FADE_DURATION) * 1000,
       );
     }
+
+    const existingStyle = document.getElementById(
+      "loading-screen-hide-default",
+    );
+    if (existingStyle) {
+      existingStyle.remove();
+    }
   }
 
   /**
    * Versteckt das Standard Foundry Loading-Popup
    */
   static hideDefaultLoading() {
-    // Verstecke das Standard-Loading-Interface
+    // Verstecke das Standard-Loading-Interface und optional alle Info-Notifications
+    const blockNotifications = game.settings.get(
+      this.ID,
+      this.SETTINGS.BLOCK_NOTIFICATIONS,
+    );
+
     const style = document.createElement("style");
     style.id = "loading-screen-hide-default";
     style.textContent = `
-      #loading-bar,
-      .notification.info {
+      #loading-bar {
         display: none !important;
       }
+      ${blockNotifications ? ".notification.info { display: none !important; }" : ""}
     `;
     if (!document.getElementById("loading-screen-hide-default")) {
       document.head.appendChild(style);
