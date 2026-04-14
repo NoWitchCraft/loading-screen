@@ -14,6 +14,7 @@ class LoadingScreenManager {
     ENABLED: "enabled",
     IMAGE_FOLDER: "imageFolder",
     SCENE_FOLDERS: "sceneFolders",
+    FOLDER_IMAGE_CACHE: "folderImageCache",
     SCENE_NAME_SOURCE: "sceneNameSource",
     BLOCK_NOTIFICATIONS: "blockNotifications",
     CUSTOM_TEXT: "customText",
@@ -68,6 +69,42 @@ class LoadingScreenManager {
     return this.DEFAULT_TIPS[language] || this.DEFAULT_TIPS.en;
   }
 
+  static getFolderImageCache(folderPath) {
+    if (!folderPath) return [];
+
+    const cache = game.settings.get(this.ID, this.SETTINGS.FOLDER_IMAGE_CACHE) || {};
+    return cache[folderPath] || [];
+  }
+
+  static async setFolderImageCache(folderPath, images) {
+    if (!folderPath || !Array.isArray(images) || images.length === 0) return;
+
+    const cache = game.settings.get(this.ID, this.SETTINGS.FOLDER_IMAGE_CACHE) || {};
+    const existing = cache[folderPath] || [];
+    const sameImages =
+      existing.length === images.length &&
+      existing.every((value, index) => value === images[index]);
+
+    if (sameImages) return;
+
+    cache[folderPath] = images;
+    await game.settings.set(this.ID, this.SETTINGS.FOLDER_IMAGE_CACHE, cache);
+  }
+
+  static async clearFolderImageCache(folderPath) {
+    if (!folderPath) return;
+
+    const cache = game.settings.get(this.ID, this.SETTINGS.FOLDER_IMAGE_CACHE) || {};
+    if (!(folderPath in cache)) return;
+
+    delete cache[folderPath];
+    await game.settings.set(this.ID, this.SETTINGS.FOLDER_IMAGE_CACHE, cache);
+  }
+
+  static async clearAllFolderImageCache() {
+    await game.settings.set(this.ID, this.SETTINGS.FOLDER_IMAGE_CACHE, {});
+  }
+
   static getSceneName(scene) {
     const source = game.settings.get(this.ID, this.SETTINGS.SCENE_NAME_SOURCE);
     const hiddenName = scene?.name;
@@ -80,30 +117,53 @@ class LoadingScreenManager {
    * Holt die Bilder aus dem passenden Ordner für die Szene
    */
   static async getImagesForScene(scene) {
-    // Hole Scene-spezifischen Ordner
     const sceneFolders = game.settings.get(
       this.ID,
       this.SETTINGS.SCENE_FOLDERS,
-    );
+    ) || {};
     let folderPath = sceneFolders[scene?.id];
 
-    // Fallback auf Standard-Ordner
-    if (!folderPath) {
+    if (!folderPath || folderPath.trim() === "") {
       folderPath = game.settings.get(this.ID, this.SETTINGS.IMAGE_FOLDER);
     }
 
-    // Wenn kein Ordner gesetzt, verwende Szenen-Hintergrund
-    if (!folderPath || folderPath.trim() === "") {
+    folderPath = folderPath?.trim();
+    const cachedImages = this.getFolderImageCache(folderPath);
+    if (!game.user.isGM && cachedImages.length > 0) {
+      return cachedImages;
+    }
+
+    if (!folderPath) {
       const sceneBackground = scene?.background?.src;
       return sceneBackground ? [sceneBackground] : ["icons/svg/clockwork.svg"];
     }
 
-    // Browse Ordner für Bilder
     try {
       const images = await this.browseFolder(folderPath);
-      return images.length > 0 ? images : ["icons/svg/clockwork.svg"];
+      if (images.length > 0) {
+        if (game.user.isGM) {
+          this.setFolderImageCache(folderPath, images).catch((error) =>
+            console.warn(
+              "Loading Screen | Unable to cache folder images:",
+              folderPath,
+              error,
+            ),
+          );
+        }
+        return images;
+      }
+
+      if (cachedImages.length > 0) {
+        return cachedImages;
+      }
+
+      const sceneBackground = scene?.background?.src;
+      return sceneBackground ? [sceneBackground] : ["icons/svg/clockwork.svg"];
     } catch (error) {
       console.error("Loading Screen | Fehler beim Laden der Bilder:", error);
+      if (cachedImages.length > 0) {
+        return cachedImages;
+      }
       return scene?.background?.src
         ? [scene.background.src]
         : ["icons/svg/clockwork.svg"];
@@ -114,7 +174,6 @@ class LoadingScreenManager {
    * Durchsucht einen Ordner nach Bildern
    */
   static async browseFolder(folderPath) {
-    // Unterstützte Bildformate
     const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
 
     try {
@@ -123,11 +182,20 @@ class LoadingScreenManager {
         return [];
       }
 
-      // Filtere nur Bilder
-      const images = browse.files.filter((file) => {
-        const ext = file.toLowerCase().slice(file.lastIndexOf("."));
-        return imageExtensions.includes(ext);
-      });
+      const images = browse.files
+        .map((file) => {
+          if (typeof file === "string") return file;
+          if (file?.path) return file.path;
+          if (file?.src) return file.src;
+          if (file?.name) return `${folderPath}/${file.name}`;
+          return null;
+        })
+        .filter((file) => typeof file === "string")
+        .filter((file) => {
+          const normalized = file.toLowerCase();
+          const ext = normalized.slice(normalized.lastIndexOf("."));
+          return imageExtensions.includes(ext);
+        });
 
       return images;
     } catch (error) {
@@ -189,10 +257,26 @@ class LoadingScreenManager {
       type: String,
       default: "",
       filePicker: "folder",
+      onChange: async () => {
+        if (!game.user?.isGM) return;
+        await this.clearAllFolderImageCache();
+      },
     });
 
     // Scene-spezifische Ordner (gespeichert als JSON)
     game.settings.register(namespace, this.SETTINGS.SCENE_FOLDERS, {
+      scope: "world",
+      config: false,
+      type: Object,
+      default: {},
+      onChange: async () => {
+        if (!game.user?.isGM) return;
+        await this.clearAllFolderImageCache();
+      },
+    });
+
+    // Cache für gefundene Bilder in Ordnern, damit Spieler auch darauf zugreifen können
+    game.settings.register(namespace, this.SETTINGS.FOLDER_IMAGE_CACHE, {
       scope: "world",
       config: false,
       type: Object,
