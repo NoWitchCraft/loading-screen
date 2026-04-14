@@ -3,7 +3,7 @@
 A professional, customizable loading screen system for Foundry VTT that replaces the default loading popup with beautiful, themed loading screens.
 
 ![Foundry VTT](https://img.shields.io/badge/Foundry%20VTT-11%2B-green)
-![Version](https://img.shields.io/badge/version-2.3.1-blue)
+![Version](https://img.shields.io/badge/version-2.3.2-blue)
 ![License](https://img.shields.io/badge/license-Apache%202.0-orange)
 
 ## ✨ Features
@@ -253,7 +253,7 @@ Found a bug? Please report it:
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-### Latest Major Version (v2.3.0)
+### Latest Major Version (v2.3.2)
 
 - ✨ Template system with 4 professional designs
 - 🎨 Standard, Minimalist, Cinematic, and Fantasy templates

@@ -5,6 +5,26 @@ All notable changes to the Loading Screen System will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.2] - 2026-04-14
+
+### Added
+
+- **Improved player image loading**: Cached GM-discovered folder images for non-GM clients
+  - Players can now use image folders even when `FilePicker.browse()` is restricted
+  - GM clients update the cache automatically on folder or per-scene folder changes
+- **Progress bar stability**: Prevent hang-ups near `90-95%` during fast scene switching
+  - Old progress intervals are cleaned up when a new loading screen starts
+  - `canvasReady` now validates against the active scene before hiding the loading screen
+
+### Fixed
+
+- Prevented stale loading state when switching quickly between scenes
+- Fixed player-side fallback to `clockwork` image when GM-selected folder images were available
+
+### Changed
+
+- Updated module version to `2.3.2`
+
 ## [2.3.1] - 2024-04-14
 
 ### Added

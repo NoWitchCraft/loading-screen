@@ -895,7 +895,7 @@ ui.notifications.info("Settings reset! Reload page (F5)");
 
 ```markdown
 **Foundry Version**: 11.315
-**Module Version**: 2.3.0
+**Module Version**: 2.3.2
 **Browser**: Chrome 120
 
 **Issue**: Loading screen not appearing
