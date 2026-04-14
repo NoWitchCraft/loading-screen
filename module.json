@@ -2,7 +2,7 @@
   "id": "loading-screen",
   "title": "Loading Screen System",
   "description": "Showing a loading Screen while a new Scene is loading.",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "compatibility": {
     "minimum": "11",
     "verified": "14",
@@ -37,6 +37,6 @@
     }
   ],
   "url": "https://github.com/NoWitchCraft/loading-screen",
-  "download": "https://github.com/NoWitchCraft/loading-screen/releases/download/2.3.0/loading-screen.zip",
-  "manifest": "https://github.com/NoWitchCraft/loading-screen/releases/download/2.3.0/module.json"
+  "download": "https://github.com/NoWitchCraft/loading-screen/releases/download/2.3.1/loading-screen.zip",
+  "manifest": "https://github.com/NoWitchCraft/loading-screen/releases/download/2.3.1/module.json"
 }

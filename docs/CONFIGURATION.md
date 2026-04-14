@@ -374,6 +374,95 @@ See [Tips Guide](TIPS.md) for details.
 
 ---
 
+### Block Notifications During Loading
+
+**Type**: Boolean (Checkbox)  
+**Default**: ✅ Enabled  
+**Requires Reload**: No
+
+**Description**: Hide info notifications while the loading screen is active.
+
+**Behavior**:
+
+- ✅ Enabled: All info notifications are hidden during loading
+- ❌ Disabled: Notifications remain visible (only loading bar is hidden)
+
+**What Gets Hidden**:
+
+- Foundry's default loading notifications ("55% SCENENAME")
+- Other info notifications that appear during scene loading
+- Error notifications are NOT affected
+
+**Use Cases**:
+
+- ✅ Enabled: Clean loading experience, no notification clutter
+- ❌ Disabled: Keep notifications visible for debugging or transparency
+
+**Technical**:
+
+```javascript
+// Check if enabled
+game.settings.get("loading-screen", "blockNotifications");
+
+// Toggle
+await game.settings.set("loading-screen", "blockNotifications", false);
+```
+
+**CSS Applied**:
+
+```css
+.notification.info {
+  display: none !important;
+}
+```
+
+---
+
+### Scene Name Display
+
+**Type**: Dropdown (String)  
+**Default**: `hidden`  
+**Requires Reload**: No
+
+**Description**: Choose which scene name to display to players during loading.
+
+**Options**:
+
+- `hidden` - Hidden Scene Name (default)
+- `navigation` - Navigation Name
+
+**Behavior**:
+
+- **Hidden Name**: The actual scene name (may be hidden from players)
+- **Navigation Name**: The name shown in the scene navigation (player-friendly)
+
+**Use Cases**:
+
+- `hidden`: Technical scene names like "Scene-001-Combat"
+- `navigation`: Player-friendly names like "The Dark Forest"
+
+**Technical**:
+
+```javascript
+// Get current setting
+game.settings.get("loading-screen", "sceneNameSource");
+
+// Set to navigation name
+await game.settings.set("loading-screen", "sceneNameSource", "navigation");
+```
+
+**Fallback Logic**:
+
+```javascript
+const source = game.settings.get("loading-screen", "sceneNameSource");
+const hiddenName = scene?.name;
+const navigationName = scene?.navigation?.name || scene?.navName || hiddenName;
+
+const displayName = source === "navigation" ? navigationName || hiddenName : hiddenName || navigationName;
+```
+
+---
+
 ## Scene Settings
 
 Access via: **Scene Config** → **Loading Screen** tab

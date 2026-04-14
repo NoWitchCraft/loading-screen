@@ -5,6 +5,44 @@ All notable changes to the Loading Screen System will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.1] - 2024-04-14
+
+### Added
+
+- **Foundry V11-V14 Compatibility**: Centralized API compatibility layer
+  - New `compat.js` module for version detection and API abstraction
+  - Automatic detection of Foundry version (V11 vs V12+)
+  - Compatible FilePicker usage across all versions
+  - SceneConfig tab integration for both V11 and V12+ structures
+
+- **Scene Name Display Option**: Choose between hidden or navigation scene names
+  - New setting: "Scene Name Display" (Hidden Scene Name / Navigation Name)
+  - Players can now see player-friendly navigation names instead of technical scene names
+  - Fallback logic ensures name is always displayed
+  - Default: Hidden Scene Name (preserves existing behavior)
+
+- **Notification Control**: Optional blocking of notifications during loading
+  - New setting: "Block Notifications During Loading"
+  - Choose whether to hide info notifications while loading screen is active
+  - Default: Enabled (preserves existing behavior)
+  - Only affects info notifications, not error messages
+
+### Changed
+
+- **FilePicker Integration**: Unified FilePicker usage through compatibility layer
+- **SceneConfig Integration**: Improved tab registration for different Foundry versions
+- **Notification Handling**: Conditional CSS application based on user preference
+- **Code Organization**: Better separation of version-specific logic
+
+### Technical
+
+- Added `SETTINGS.SCENE_NAME_SOURCE` setting key
+- Added `SETTINGS.BLOCK_NOTIFICATIONS` setting key
+- New `compat.js` file with version detection utilities
+- Updated `hideDefaultLoading()` to respect notification blocking preference
+- New `getSceneName()` method for scene name resolution
+- Enhanced CSS application/removal logic
+
 ## [2.3.0] - 2024-02-16
 
 ### Added

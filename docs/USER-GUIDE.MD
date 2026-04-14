@@ -106,6 +106,24 @@ Navigate to **Settings** → **Module Settings** → **Loading Screen System**
 - **Default**: 5 seconds
 - **Tip**: Lower for variety, Higher to read comfortably
 
+#### Block Notifications During Loading
+
+- **What it does**: Hide info notifications while loading
+- **Default**: ✅ Enabled
+- **Options**:
+  - ✅ Enabled: Clean loading experience, no notification clutter
+  - ❌ Disabled: Keep notifications visible for debugging
+- **Note**: Only affects info notifications, not errors
+
+#### Scene Name Display
+
+- **What it does**: Choose which scene name players see
+- **Default**: Hidden Scene Name
+- **Options**:
+  - **Hidden Scene Name**: Technical names (e.g., "Scene-001-Combat")
+  - **Navigation Name**: Player-friendly names (e.g., "The Dark Forest")
+- **Tip**: Use Navigation Name for better player experience
+
 ## Template Selection
 
 ### Available Templates
