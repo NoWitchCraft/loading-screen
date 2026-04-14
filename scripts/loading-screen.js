@@ -6,6 +6,7 @@ import { tips_de } from "./tips-de.js";
 import { tips_en } from "./tips-en.js";
 import { LoadingScreenConfig, CustomTipsConfig } from "./config.js";
 import { registerSceneConfigTab } from "./scene-config.js";
+import { browseFolderApi } from "./compat.js";
 
 class LoadingScreenManager {
   static ID = "loading-screen";
@@ -106,12 +107,7 @@ class LoadingScreenManager {
     const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
 
     try {
-      // Nutze FilePicker API (V13 kompatibel)
-      const FilePicker =
-        foundry.applications?.apps?.FilePicker?.implementation ||
-        window.FilePicker;
-      const browse = await FilePicker.browse("data", folderPath);
-
+      const browse = await browseFolderApi(folderPath);
       if (!browse || !browse.files) {
         return [];
       }

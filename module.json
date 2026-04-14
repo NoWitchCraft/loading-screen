@@ -5,8 +5,8 @@
   "version": "2.3.0",
   "compatibility": {
     "minimum": "11",
-    "verified": "13",
-    "maximum": "13.999"
+    "verified": "14",
+    "maximum": "14.999"
   },
   "authors": [
     {
@@ -16,6 +16,7 @@
   ],
   "esmodules": [
     "scripts/lib/lib-wrapper-shim.js",
+    "scripts/compat.js",
     "scripts/tips-de.js",
     "scripts/tips-en.js",
     "scripts/config.js",
