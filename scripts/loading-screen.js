@@ -36,6 +36,7 @@ class LoadingScreenManager {
   static _currentTipIndex = 0;
   static _currentImages = [];
   static _currentImageIndex = 0;
+  static _currentSceneId = null;
 
   static initialize() {
     this.registerSettings();
@@ -328,8 +329,9 @@ class LoadingScreenManager {
     });
 
     // Hook für Scene-Rendering abgeschlossen
-    Hooks.on("canvasReady", () => {
+    Hooks.on("canvasReady", (canvas) => {
       if (!game.settings.get(this.ID, this.SETTINGS.ENABLED)) return;
+      if (canvas?.scene?.id !== this._currentSceneId) return;
       this.hideLoadingScreen();
     });
 
@@ -370,6 +372,8 @@ class LoadingScreenManager {
     const template = game.settings.get(this.ID, this.SETTINGS.TEMPLATE);
     const sceneName =
       this.getSceneName(scene) || game.i18n.localize("LOADING_SCREEN.Loading");
+
+    this._currentSceneId = scene?.id;
 
     // Bereite Tipps vor
     let currentTip = "";
@@ -445,6 +449,16 @@ class LoadingScreenManager {
     // Stoppe Tipp-Rotation
     this.stopTipRotation();
 
+    if (this._progressInterval) {
+      clearInterval(this._progressInterval);
+      this._progressInterval = null;
+    }
+
+    const progressFill = document.getElementById("loading-progress-fill");
+    if (progressFill) {
+      progressFill.style.width = "100%";
+    }
+
     const overlay = $("#loading-screen-overlay");
     if (overlay.length) {
       overlay.addClass("fade-out");
@@ -494,17 +508,22 @@ class LoadingScreenManager {
     const progressFill = document.getElementById("loading-progress-fill");
     if (!progressFill) return;
 
+    if (this._progressInterval) {
+      clearInterval(this._progressInterval);
+      this._progressInterval = null;
+    }
+
     let progress = 0;
+    progressFill.style.width = "0%";
+
     const interval = setInterval(() => {
-      progress += Math.random() * 15;
-      if (progress >= 90) {
-        progress = 90; // Halte bei 90% bis canvasReady
-        clearInterval(interval);
+      progress += Math.random() * 10;
+      if (progress >= 98) {
+        progress = 98;
       }
       progressFill.style.width = `${progress}%`;
     }, 100);
 
-    // Speichere Interval-Referenz für Cleanup
     this._progressInterval = interval;
   }
 
